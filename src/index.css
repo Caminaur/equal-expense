@@ -1,1 +1,31 @@
+@import url("https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@300;400;500;600;700;800;900&family=Kadwa:wght@400;700&display=swap");
 @import "tailwindcss";
+@theme {
+  /* Tipografía */
+  --font-sans: "Arial", sans-serif;
+  --text-desktop: 32px;
+  --text-mobile: 20px;
+  --font-1: "Inknut Antiqua", serif;
+  --font-2: "Kadwa", serif;
+
+  /* Colores */
+  --color-light-blue: #1e5f93;
+  --color-dark-bg: #1f1f1f;
+  --color-example-blue: #73b4ff;
+  --color-example-pink: #ff00b3;
+  --color-example-green: #00d820;
+  --color-example-red: #d80000;
+
+  /* Diseños */
+  --bg-theme-blue: linear-gradient(
+    90deg,
+    var(--color-dark-blue),
+    var(--color-light-blue)
+  );
+  --bg-theme-purple: linear-gradient(
+    90deg,
+    var(--color-purple),
+    var(--color-light-blue)
+  );
+  --bg-theme-arena: var(--color-arena);
+}
