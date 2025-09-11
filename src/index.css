@@ -9,11 +9,15 @@
   --font-2: "Kadwa", serif;
 
   /* Colores */
+  --color-text-dark: #373c39;
+  --color-light: #eeeeee;
+  --color-light-font: #eeeeee;
+  --color-dark-blue: #0e0f65;
   --color-light-blue: #1e5f93;
   --color-dark-bg: #1f1f1f;
   --color-example-blue: #73b4ff;
   --color-example-pink: #ff00b3;
-  --color-example-green: #00d820;
+  --color-example-green: #03be1f;
   --color-example-red: #d80000;
 
   /* Diseños */
