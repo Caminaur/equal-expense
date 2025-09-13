@@ -1,8 +1,9 @@
+import { Link } from "react-router-dom";
 import { PlayIcon } from "../assets/icons";
 
 function InfoPage() {
   return (
-    <div className="h-full w-full p-0 lg:max-w-200 lg:max-h-8/12 lg:mt-8">
+    <div className="h-full w-full p-0 lg:max-w-200 lg:max-h-10/12 lg:mt-8">
       <div className="h-full w-full bg-white/20 rounded-2xl p-8 text-light-font flex flex-col">
         <p className="font-2 text-lg pt-3 md:w-2/3 text-shadow-sm text-shadow-black/50 sm:pt-6">
           This application divides expenses proportionally according to each
@@ -38,9 +39,12 @@ function InfoPage() {
             {" --> "} 33% of his salary.
           </p>
         </div>
-        <button className="bg-light-blue flex items-center justify-between px-4 py-4 rounded-lg text-white w-full mt-auto text-2xl max-w-80 shadow-md shadow-black/40 duration-200 cursor-pointer hover:brightness-120 transition-all">
+        <Link
+          to={"/form"}
+          className="bg-light-blue flex items-center justify-between px-4 py-4 rounded-lg text-white w-full mt-auto text-2xl max-w-80 shadow-sm shadow-black/40 hover:shadow-md duration-200 cursor-pointer hover:brightness-120 transition-all"
+        >
           Calculate Expenses <PlayIcon className="" />
-        </button>
+        </Link>
       </div>
     </div>
   );
