@@ -1,23 +1,25 @@
-import { useEffect, useRef, useState } from "react";
 import { LangIcon, InfoIcon, LangIconMobile } from "../assets/icons";
 import { Link } from "react-router-dom";
+import useDropdown from "../Hooks/useDropdown";
 
 function Navbar() {
-  const [active, setActive] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(e.target as Node)
-      ) {
-        setActive(false);
-      }
-    };
-    document.addEventListener("click", handleClickOutside);
-    return () => document.removeEventListener("click", handleClickOutside);
-  }, []);
+  const { active, setActive, dropdownRef } = useDropdown();
 
+  type ButtonLangeProps = {
+    displayName: string;
+    dbname: string;
+    selected?: boolean | null;
+  };
+  const ButtonLang = ({ displayName, dbname, selected }: ButtonLangeProps) => (
+    <button
+      name={dbname}
+      className={`w-full py-2  hover:brightness-125 text-left pl-2 rounded-xs cursor-pointer text-light font-2 font-medium select-none ${
+        selected ? "bg-dark-blue/90" : "bg-dark-blue/60"
+      }`}
+    >
+      {displayName}
+    </button>
+  );
   return (
     <div className="w-full flex justify-between items-center pb-4 lg:bg-light lg:max-w-200 lg:pb-default lg:py-3 lg:px-4 lg:rounded-lg relative">
       <Link to={"/"} className="text-white text-2xl font-1 lg:text-text-dark">
@@ -38,20 +40,18 @@ function Navbar() {
             <LangIconMobile className="h-12 w-12 lg:hidden"></LangIconMobile>
 
             <div
-              className={`bg-light-blue min-w-50 min-h-40 md:bg-light absolute right-0 top-full -mt-2 rounded-sm transition-all duration-300 ${
+              className={`min-w-50 min-h-40 bg-light absolute right-0 top-full -mt-2 rounded-sm transition-all duration-300 ${
                 active ? "opacity-100 mt-2" : "opacity-0 pointer-events-none"
               }`}
             >
               <ul className="flex flex-col p-4 gap-2">
-                <button className="w-full py-2 bg-dark-blue/90 hover:brightness-125 text-left pl-2 rounded-xs cursor-pointer text-light font-2 font-medium select-none">
-                  Englisch
-                </button>
-                <button className="w-full py-2 bg-dark-blue/50 md:bg-light-blue hover:brightness-125 text-left pl-2 rounded-xs cursor-pointer text-light font-2 font-medium select-none">
-                  Spanisch
-                </button>
-                <button className="w-full py-2 bg-dark-blue/50 md:bg-light-blue hover:brightness-125 text-left pl-2 rounded-xs cursor-pointer text-light font-2 font-medium select-none">
-                  German
-                </button>
+                <ButtonLang
+                  dbname="English"
+                  displayName="Englisch"
+                  selected={true}
+                />
+                <ButtonLang dbname="Spanish" displayName="Spanisch" />
+                <ButtonLang dbname="German" displayName="Deutsch" />
               </ul>
             </div>
           </li>
