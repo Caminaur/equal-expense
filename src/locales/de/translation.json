@@ -1,0 +1,26 @@
+{
+  "form": {
+    "label1": "Wie viel verdienst du?",
+    "label2": "Wie viel verdient dein Partner?",
+    "label3": "Gesamtausgaben",
+    "buttonText": "Ausgaben berechnen"
+  },
+  "info": {
+    "description": "Diese Anwendung teilt die Ausgaben proportional zum Gehalt jeder Person auf, sodass beide den gleichen Prozentsatz ihres Einkommens beitragen!",
+    "lisa": "<pink>Lisa</pink> verdient ",
+    "lisaSalary": "$2000",
+    "tom": "<blue>Tom</blue> verdient ",
+    "tomSalary": "$1000",
+    "expenses": "Ausgaben: <red>€1000</red>",
+    "conclusion": "<pink>Lisa</pink> sollte <green>€666</green> zahlen --> 33% ihres Gehalts.",
+    "conclusion2": "<ptag><blue>Tom</blue> sollte <green>€333</green> zahlen --> 33% seines Gehalts.</ptag>",
+    "buttonText": "Ausgaben berechnen"
+  },
+  "navbar": {
+    "es": "Spanisch",
+    "en": "Englisch",
+    "de": "Deutsch",
+    "it": "Italienisch",
+    "fr": "Französisch"
+  }
+}

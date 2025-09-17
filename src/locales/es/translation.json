@@ -1,0 +1,20 @@
+{
+  "form": {
+    "label1": "¿Cuánto dinero ganas?",
+    "label2": "¿Cuánto dinero gana tu pareja?",
+    "label3": "Monto total de los gastos",
+    "buttonText": "Calcular gastos"
+  },
+  "info": {
+    "description": "Esta aplicación divide los gastos proporcionalmente según el salario de cada persona...",
+    "lisa": "<pink>Lisa</pink> gana ",
+    "lisaSalary": "$2000"
+  },
+  "navbar": {
+    "es": "Español",
+    "en": "Inglés",
+    "de": "Alemán",
+    "it": "Italiano",
+    "fr": "Francés"
+  }
+}

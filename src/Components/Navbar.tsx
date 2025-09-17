@@ -1,21 +1,30 @@
 import { LangIcon, InfoIcon, LangIconMobile } from "../assets/icons";
 import { Link } from "react-router-dom";
 import useDropdown from "../Hooks/useDropdown";
+import { useTranslation } from "react-i18next";
 
 function Navbar() {
+  const { t, i18n } = useTranslation();
   const { active, setActive, dropdownRef } = useDropdown();
 
   type ButtonLangeProps = {
     displayName: string;
     dbname: string;
     selected?: boolean | null;
+    lng: string;
   };
-  const ButtonLang = ({ displayName, dbname, selected }: ButtonLangeProps) => (
+  const ButtonLang = ({
+    displayName,
+    dbname,
+    selected,
+    lng,
+  }: ButtonLangeProps) => (
     <button
       name={dbname}
       className={`w-full py-2  hover:brightness-125 text-left pl-2 rounded-xs cursor-pointer text-light font-2 font-medium select-none ${
         selected ? "bg-dark-blue/90" : "bg-dark-blue/60"
       }`}
+      onClick={() => i18n.changeLanguage(lng)}
     >
       {displayName}
     </button>
@@ -46,12 +55,35 @@ function Navbar() {
             >
               <ul className="flex flex-col p-4 gap-2">
                 <ButtonLang
-                  dbname="English"
-                  displayName="Englisch"
-                  selected={true}
+                  dbname="english"
+                  displayName={t("navbar.en")}
+                  selected={i18n.language === "en-EN" ? true : false}
+                  lng="en-EN"
                 />
-                <ButtonLang dbname="Spanish" displayName="Spanisch" />
-                <ButtonLang dbname="German" displayName="Deutsch" />
+                <ButtonLang
+                  dbname="spanish"
+                  displayName={t("navbar.es")}
+                  selected={i18n.language === "es-ES" ? true : false}
+                  lng="es-ES"
+                />
+                <ButtonLang
+                  dbname="german"
+                  displayName={t("navbar.de")}
+                  selected={i18n.language === "de-DE" ? true : false}
+                  lng="de-DE"
+                />
+                <ButtonLang
+                  dbname="french"
+                  displayName={t("navbar.fr")}
+                  selected={i18n.language === "fr-FR" ? true : false}
+                  lng="fr-FR"
+                />
+                <ButtonLang
+                  dbname="italian"
+                  displayName={t("navbar.it")}
+                  selected={i18n.language === "it-IT" ? true : false}
+                  lng="it-IT"
+                />
               </ul>
             </div>
           </li>

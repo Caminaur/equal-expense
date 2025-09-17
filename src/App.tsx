@@ -10,7 +10,6 @@ import {
 
 const ComponentView = () => {
   const { component } = useParams();
-  console.log(component);
 
   let ComponentToRender: React.ComponentType;
   switch (component) {

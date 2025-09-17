@@ -1,0 +1,26 @@
+{
+  "form": {
+    "label1": "Quanto guadagni?",
+    "label2": "Quanto guadagna il tuo partner?",
+    "label3": "Importo totale delle spese",
+    "buttonText": "Calcola spese"
+  },
+  "info": {
+    "description": "Questa applicazione divide le spese proporzionalmente in base allo stipendio di ciascuna persona, così entrambi contribuiscono con la stessa percentuale del loro reddito!",
+    "lisa": "<pink>Lisa</pink> guadagna ",
+    "lisaSalary": "$2000",
+    "tom": "<blue>Tom</blue> guadagna ",
+    "tomSalary": "$1000",
+    "expenses": "Spese: <red>€1000</red>",
+    "conclusion": "<pink>Lisa</pink> dovrebbe pagare <green>€666</green> --> 33% del suo stipendio.",
+    "conclusion2": "<ptag><blue>Tom</blue> dovrebbe pagare <green>€333</green> --> 33% del suo stipendio.</ptag>",
+    "buttonText": "Calcola spese"
+  },
+  "navbar": {
+    "es": "Spagnolo",
+    "en": "Inglese",
+    "de": "Tedesco",
+    "it": "Italiano",
+    "fr": "Francese"
+  }
+}

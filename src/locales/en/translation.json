@@ -1,0 +1,26 @@
+{
+  "form": {
+    "label1": "How much do you earn?",
+    "label2": "How much does your partner earn?",
+    "label3": "Total amount of expenses",
+    "buttonText": "Calculate Expenses"
+  },
+  "info": {
+    "description": "This application divides expenses proportionally according to each person's salary, so both contribute the same percentage of their income!",
+    "lisa": "<pink>Lisa</pink> earns ",
+    "lisaSalary": "$2000",
+    "tom": "<blue>Tom</blue> earns ",
+    "tomSalary": "$1000",
+    "expenses": "Expenses: <red>€1000</red>",
+    "conclusion": "<pink>Lisa</pink> should pay <green>€666</green> --> 33% of her salary.",
+    "conclusion2": "<ptag>While <blue>Tom</blue> should pay <green>€333</green> --> 33% of his salary.</ptag>",
+    "buttonText": "Calculate Expenses"
+  },
+  "navbar": {
+    "es": "Spanish",
+    "en": "English",
+    "de": "German",
+    "it": "Italian",
+    "fr": "French"
+  }
+}

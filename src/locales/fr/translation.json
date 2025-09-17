@@ -1,0 +1,26 @@
+{
+  "form": {
+    "label1": "Combien gagnes-tu ?",
+    "label2": "Combien gagne ton partenaire ?",
+    "label3": "Montant total des dépenses",
+    "buttonText": "Calculer les dépenses"
+  },
+  "info": {
+    "description": "Cette application divise les dépenses proportionnellement au salaire de chaque personne, afin que les deux contribuent avec le même pourcentage de leurs revenus !",
+    "lisa": "<pink>Lisa</pink> gagne ",
+    "lisaSalary": "$2000",
+    "tom": "<blue>Tom</blue> gagne ",
+    "tomSalary": "$1000",
+    "expenses": "Dépenses : <red>€1000</red>",
+    "conclusion": "<pink>Lisa</pink> devrait payer <green>€666</green> --> 33% de son salaire.",
+    "conclusion2": "<ptag><blue>Tom</blue> devrait payer <green>€333</green> --> 33% de son salaire.</ptag>",
+    "buttonText": "Calculer les dépenses"
+  },
+  "navbar": {
+    "es": "Espagnol",
+    "en": "Anglais",
+    "de": "Allemand",
+    "it": "Italien",
+    "fr": "Français"
+  }
+}
