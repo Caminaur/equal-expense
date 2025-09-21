@@ -12,12 +12,25 @@ type Expense = {
 
 type Props = {
   data: Expense[];
+  onRemove: (index: number) => void;
 };
 
-export default function ExpenseTable({ data }: Props) {
+export default function ExpenseTable({ data, onRemove }: Props) {
   const columns: ColumnDef<Expense>[] = [
     { accessorKey: "expense", header: "Expense" },
     { accessorKey: "amount", header: "Amount" },
+    {
+      id: "actions",
+      header: "Actions",
+      cell: ({ row }) => (
+        <button
+          className="bg-red-800 text-white px-2 py-1 rounded hover:bg-red-700 cursor-pointer"
+          onClick={() => onRemove(row.index)}
+        >
+          ✕
+        </button>
+      ),
+    },
   ];
 
   const table = useReactTable({

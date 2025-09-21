@@ -1,4 +1,3 @@
-import React from "react";
 import { MoneyIcon } from "../../assets/icons";
 
 type InputDivProps = {

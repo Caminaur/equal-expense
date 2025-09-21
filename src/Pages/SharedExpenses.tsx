@@ -2,7 +2,7 @@ import { MoneyIcon, PlayIcon } from "../assets/icons";
 import { Link } from "react-router-dom";
 import { Trans, useTranslation } from "react-i18next";
 import ExpenseTable from "../Components/Expenses/Table";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import InputDiv from "../Components/Expenses/InputDiv";
 
 type Expense = {
@@ -24,8 +24,25 @@ function SharedExpenses() {
       ...data,
       { expense: formData.name, amount: Number(formData.price) },
     ]);
+
+    localStorage.setItem("expenses", JSON.stringify(data));
     setFormData({ name: "", price: "" });
   }
+  function removeExpense(index: number) {
+    let newData = data.filter((_, i) => i !== index);
+
+    setData(newData);
+    localStorage.setItem("expenses", JSON.stringify(newData));
+  }
+
+  useEffect(() => {
+    localStorage.setItem("expenses", JSON.stringify(data));
+  }, [data]);
+
+  useEffect(() => {
+    const storedExpenses = JSON.parse(localStorage.getItem("expenses") || "[]");
+    setData(storedExpenses);
+  }, []);
 
   return (
     <div className="h-full w-full p-0 lg:max-w-200 lg:max-h-9/12 lg:mt-8">
@@ -59,7 +76,11 @@ function SharedExpenses() {
           />
         </div>
         <div className="flex-1 overflow-y-auto">
-          {data.length !== 0 ? <ExpenseTable data={data} /> : ""}
+          {data.length !== 0 ? (
+            <ExpenseTable data={data} onRemove={removeExpense} />
+          ) : (
+            ""
+          )}
         </div>
         <Link
           to={"/form"}
