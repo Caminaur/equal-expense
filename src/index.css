@@ -35,3 +35,7 @@
   );
   --bg-theme-arena: var(--color-arena);
 }
+
+html {
+  scrollbar-gutter: stable;
+}

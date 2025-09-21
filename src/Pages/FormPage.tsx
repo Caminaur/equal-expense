@@ -49,7 +49,7 @@ function FormPage() {
           text={t("form.label3")}
         />
         <Link
-          to={"/form"}
+          to={"/sharedExpenses"}
           className="bg-light-blue flex items-center justify-between px-4 py-4 rounded-lg text-white w-full mt-auto text-2xl max-w-80 shadow-sm shadow-black/40 hover:shadow-md duration-200 cursor-pointer hover:brightness-120 transition-all"
         >
           <Trans i18nKey="form.buttonText"></Trans>

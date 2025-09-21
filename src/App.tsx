@@ -1,5 +1,6 @@
 import Navbar from "./Components/Navbar";
 import FormPage from "./Pages/FormPage";
+import SharedExpenses from "./Pages/SharedExpenses";
 import InfoPage from "./Pages/InfoPage";
 import {
   BrowserRouter as Router,
@@ -18,6 +19,9 @@ const ComponentView = () => {
       break;
     case "form":
       ComponentToRender = FormPage;
+      break;
+    case "sharedExpenses":
+      ComponentToRender = SharedExpenses;
       break;
     case "info":
       ComponentToRender = InfoPage;
