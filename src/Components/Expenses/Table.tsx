@@ -10,6 +10,16 @@ type Expense = {
   amount: number;
 };
 
+function formatNumber(price: number) {
+  const formatted = new Intl.NumberFormat("de-DE", {
+    style: "currency",
+    currency: "EUR",
+    compactDisplay: "short",
+  }).format(price);
+
+  return formatted;
+}
+
 type Props = {
   data: Expense[];
   onRemove: (index: number) => void;
@@ -18,7 +28,11 @@ type Props = {
 export default function ExpenseTable({ data, onRemove }: Props) {
   const columns: ColumnDef<Expense>[] = [
     { accessorKey: "expense", header: "Expense" },
-    { accessorKey: "amount", header: "Amount" },
+    {
+      accessorKey: "amount",
+      header: "Amount",
+      cell: ({ getValue }) => formatNumber(getValue<number>()),
+    },
     {
       id: "actions",
       header: "Actions",

@@ -1,4 +1,4 @@
-import { MoneyIcon, PlayIcon } from "../assets/icons";
+import { PlayIcon } from "../assets/icons";
 import { Link } from "react-router-dom";
 import { Trans, useTranslation } from "react-i18next";
 import ExpenseTable from "../Components/Expenses/Table";
@@ -12,7 +12,10 @@ type Expense = {
 
 function SharedExpenses() {
   const { t } = useTranslation();
-  const [data, setData] = useState<Expense[]>([]);
+  const [data, setData] = useState<Expense[]>(() => {
+    const stored = localStorage.getItem("expenses");
+    return stored ? JSON.parse(stored) : [];
+  });
   const [formData, setFormData] = useState({
     name: "",
     price: "",
@@ -20,19 +23,17 @@ function SharedExpenses() {
 
   function addExpense() {
     if (!formData.name || !formData.price) return;
-    setData([
+    const newData = [
       ...data,
       { expense: formData.name, amount: Number(formData.price) },
-    ]);
-
-    localStorage.setItem("expenses", JSON.stringify(data));
+    ];
+    setData(newData);
     setFormData({ name: "", price: "" });
   }
   function removeExpense(index: number) {
     let newData = data.filter((_, i) => i !== index);
 
     setData(newData);
-    localStorage.setItem("expenses", JSON.stringify(newData));
   }
 
   useEffect(() => {
@@ -50,15 +51,15 @@ function SharedExpenses() {
         <div>
           <div className="h-1.5 w-full bg-light-bg/80 my-2"></div>
           <p className="font-1 text-lg md:w-2/3 text-shadow-sm text-shadow-black/50">
-            Let's add your shared expenses!
+            {t("expenses.title")}
           </p>
           <div className="h-1.5 w-full bg-light-bg/80 my-2"></div>
         </div>
 
         <InputDiv
           inputName="user-1-salary"
-          placeholder="Rent..."
-          text="Expense name"
+          placeholder={t("expenses.labelNamePlaceHolder")}
+          text={t("expenses.labelName")}
           type="string"
           value={formData.name}
           setValue={(val) => setFormData({ ...formData, name: val })}
@@ -68,7 +69,7 @@ function SharedExpenses() {
           <InputDiv
             inputName="user-2-salary"
             placeholder="1200..."
-            text="Amount"
+            text={t("expenses.labelAmount")}
             value={formData.price}
             setValue={(val) => setFormData({ ...formData, price: val })}
             addToTable={addExpense}
