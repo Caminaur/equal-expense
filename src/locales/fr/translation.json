@@ -22,5 +22,11 @@
     "de": "Allemand",
     "it": "Italien",
     "fr": "Français"
+  },
+  "expenses": {
+    "title": "Ajoutons vos dépenses partagées !",
+    "labelName": "Nom de la dépense",
+    "labelNamePlaceHolder": "Loyer...",
+    "labelAmount": "Montant"
   }
 }

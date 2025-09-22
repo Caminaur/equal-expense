@@ -22,5 +22,11 @@
     "de": "Deutsch",
     "it": "Italienisch",
     "fr": "Französisch"
+  },
+  "expenses": {
+    "title": "Fügen wir deine geteilten Ausgaben hinzu!",
+    "labelName": "Ausgabenname",
+    "labelNamePlaceHolder": "Miete...",
+    "labelAmount": "Betrag"
   }
 }

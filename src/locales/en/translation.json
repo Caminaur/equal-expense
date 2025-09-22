@@ -22,5 +22,11 @@
     "de": "German",
     "it": "Italian",
     "fr": "French"
+  },
+  "expenses": {
+    "title": "Let's add your shared expenses!",
+    "labelName": "Expense name",
+    "labelNamePlaceHolder": "Rent...",
+    "labelAmount": "Amount"
   }
 }

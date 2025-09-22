@@ -16,5 +16,11 @@
     "de": "Alemán",
     "it": "Italiano",
     "fr": "Francés"
+  },
+  "expenses": {
+    "title": "¡Agreguemos tus gastos compartidos!",
+    "labelName": "Gasto",
+    "labelNamePlaceHolder": "Alquiler...",
+    "labelAmount": "Cantidad"
   }
 }

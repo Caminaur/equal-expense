@@ -22,5 +22,11 @@
     "de": "Tedesco",
     "it": "Italiano",
     "fr": "Francese"
+  },
+  "expenses": {
+    "title": "Aggiungiamo le tue spese condivise!",
+    "labelName": "Nome della spesa",
+    "labelNamePlaceHolder": "Affitto...",
+    "labelAmount": "Importo"
   }
 }
