@@ -4,6 +4,7 @@ import { Trans, useTranslation } from "react-i18next";
 import ExpenseTable from "../Components/Expenses/Table";
 import { useEffect, useState } from "react";
 import InputDiv from "../Components/Expenses/InputDiv";
+import { formatNumber } from "../utils";
 
 type Expense = {
   expense: string;
@@ -35,6 +36,14 @@ function SharedExpenses() {
 
     setData(newData);
   }
+  function getTotal() {
+    let total: number = 0;
+    for (const e of data) {
+      total += e.amount;
+    }
+
+    return formatNumber(total);
+  }
 
   useEffect(() => {
     localStorage.setItem("expenses", JSON.stringify(data));
@@ -47,45 +56,51 @@ function SharedExpenses() {
 
   return (
     <div className="h-full w-full p-0 lg:max-w-200 lg:max-h-9/12 lg:mt-8">
-      <div className="h-full w-full bg-white/20 rounded-2xl p-8 lg:p-6 text-light-font flex flex-col justify-around gap-4">
+      <div className="h-full w-full bg-white/20 rounded-2xl p-2 sm:p-8 lg:p-6 text-light-font flex flex-col justify-between gap-4">
         <div>
-          <div className="h-1.5 w-full bg-light-bg/80 my-2"></div>
-          <p className="font-1 text-lg md:w-2/3 text-shadow-sm text-shadow-black/50">
+          <p className="w-fit font-1 text-lg py-1 md:py-3 text-shadow-sm text-shadow-black/50 border-t-6 border-b-6 border-light-bg/80 ">
             {t("expenses.title")}
           </p>
-          <div className="h-1.5 w-full bg-light-bg/80 my-2"></div>
         </div>
-
-        <InputDiv
-          inputName="user-1-salary"
-          placeholder={t("expenses.labelNamePlaceHolder")}
-          text={t("expenses.labelName")}
-          type="string"
-          value={formData.name}
-          setValue={(val) => setFormData({ ...formData, name: val })}
-          addToTable={addExpense}
-        />
-        <div className="flex items-end">
-          <InputDiv
-            inputName="user-2-salary"
-            placeholder="1200..."
-            text={t("expenses.labelAmount")}
-            value={formData.price}
-            setValue={(val) => setFormData({ ...formData, price: val })}
-            addToTable={addExpense}
-            type="number"
-          />
+        <div className="flex flex-col gap-3 justify-between md:flex-row md:gap-6 h-full">
+          <div className="flex flex-col gap-4">
+            <InputDiv
+              inputName="user-1-salary"
+              placeholder={t("expenses.labelNamePlaceHolder")}
+              text={t("expenses.labelName")}
+              type="string"
+              value={formData.name}
+              setValue={(val) => setFormData({ ...formData, name: val })}
+              addToTable={addExpense}
+            />
+            <div className="flex items-end">
+              <InputDiv
+                inputName="user-2-salary"
+                placeholder="1200..."
+                text={t("expenses.labelAmount")}
+                value={formData.price}
+                setValue={(val) => setFormData({ ...formData, price: val })}
+                addToTable={addExpense}
+                type="number"
+              />
+            </div>
+          </div>
+          <div className="flex-1 overflow-y-auto">
+            {data.length !== 0 ? (
+              <ExpenseTable data={data} onRemove={removeExpense} />
+            ) : (
+              ""
+            )}
+          </div>
         </div>
-        <div className="flex-1 overflow-y-auto">
-          {data.length !== 0 ? (
-            <ExpenseTable data={data} onRemove={removeExpense} />
-          ) : (
-            ""
-          )}
+        <div>
+          <p className="font-2 text-2xl md:w-2/3 text-shadow-sm text-shadow-black/50 mt-auto">
+            Total: {getTotal()}
+          </p>
         </div>
         <Link
           to={"/form"}
-          className="bg-light-blue flex items-center justify-between px-4 py-4 rounded-lg text-white w-full mt-auto text-2xl max-w-80 shadow-sm shadow-black/40 hover:shadow-md duration-200 cursor-pointer hover:brightness-120 transition-all"
+          className="bg-light-blue flex items-center justify-between px-4 py-4 rounded-lg text-white w-full text-2xl max-w-80 shadow-sm shadow-black/40 hover:shadow-md duration-200 cursor-pointer hover:brightness-120 transition-all"
         >
           <Trans i18nKey="form.buttonText"></Trans>
           <PlayIcon className="" />

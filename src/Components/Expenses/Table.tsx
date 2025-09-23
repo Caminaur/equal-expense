@@ -4,21 +4,12 @@ import {
   flexRender,
   type ColumnDef,
 } from "@tanstack/react-table";
+import { formatNumber } from "../../utils";
 
 type Expense = {
   expense: string;
   amount: number;
 };
-
-function formatNumber(price: number) {
-  const formatted = new Intl.NumberFormat("de-DE", {
-    style: "currency",
-    currency: "EUR",
-    compactDisplay: "short",
-  }).format(price);
-
-  return formatted;
-}
 
 type Props = {
   data: Expense[];
@@ -54,7 +45,7 @@ export default function ExpenseTable({ data, onRemove }: Props) {
   });
 
   return (
-    <div className="overflow-y-auto max-h-60">
+    <div className="overflow-y-auto max-h-60 max-w-120 md:max-h-117">
       <table className="border-collapse border border-gray-300 w-full">
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
@@ -62,7 +53,7 @@ export default function ExpenseTable({ data, onRemove }: Props) {
               {headerGroup.headers.map((header) => (
                 <th
                   key={header.id}
-                  className="border border-dark-blue px-4 py-2 bg-light-blue text-left"
+                  className="border border-dark-blue px-2 py-1 sm:px-4 sm:py-2 bg-light-blue text-left"
                 >
                   {header.isPlaceholder
                     ? null
@@ -79,7 +70,10 @@ export default function ExpenseTable({ data, onRemove }: Props) {
           {table.getRowModel().rows.map((row) => (
             <tr key={row.id}>
               {row.getVisibleCells().map((cell) => (
-                <td key={cell.id} className="border border-dark-blue px-4 py-2">
+                <td
+                  key={cell.id}
+                  className="border break-all border-dark-blue px-2 py-1 sm:px-4 sm:py-2 text-center"
+                >
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
               ))}
