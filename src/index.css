@@ -21,6 +21,7 @@
   --color-example-pink: #ff00b3;
   --color-example-green: #03be1f;
   --color-example-red: #d80000;
+  --color-error-red: #ff1414;
 
   /* Diseños */
   --bg-theme-blue: linear-gradient(

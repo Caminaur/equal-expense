@@ -11,25 +11,58 @@ type Expense = {
   amount: number;
 };
 
+type FormData = {
+  name: string;
+  price: string;
+  nameError: string | null;
+  priceError: string | null;
+};
+
 function SharedExpenses() {
   const { t } = useTranslation();
   const [data, setData] = useState<Expense[]>(() => {
     const stored = localStorage.getItem("expenses");
     return stored ? JSON.parse(stored) : [];
   });
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     name: "",
     price: "",
+    nameError: null,
+    priceError: null,
   });
 
   function addExpense() {
-    if (!formData.name || !formData.price) return;
+    const isThereName = formData.name;
+    const isTherePrice = formData.price;
+    const isPriceBiggerThanZero = parseInt(formData.price) > 0;
+    let nameError: string | null = null;
+    let priceError: string | null = null;
+
+    if (!isThereName) {
+      nameError = "The name of the expense is mandatory";
+    }
+    if (!isTherePrice || !isPriceBiggerThanZero) {
+      priceError = "The amount needs to be greater than 0!";
+    }
+
+    if (nameError || priceError) {
+      setFormData({
+        ...formData,
+        nameError,
+        priceError,
+      });
+      return;
+    }
+
     const newData = [
       ...data,
-      { expense: formData.name, amount: Number(formData.price) },
+      {
+        expense: formData.name,
+        amount: Number(formData.price),
+      },
     ];
     setData(newData);
-    setFormData({ name: "", price: "" });
+    setFormData({ name: "", price: "", nameError: null, priceError: null });
   }
   function removeExpense(index: number) {
     let newData = data.filter((_, i) => i !== index);
@@ -72,6 +105,7 @@ function SharedExpenses() {
               value={formData.name}
               setValue={(val) => setFormData({ ...formData, name: val })}
               addToTable={addExpense}
+              error={formData.nameError}
             />
             <div className="flex items-end">
               <InputDiv
@@ -82,6 +116,7 @@ function SharedExpenses() {
                 setValue={(val) => setFormData({ ...formData, price: val })}
                 addToTable={addExpense}
                 type="number"
+                error={formData.priceError}
               />
             </div>
           </div>
