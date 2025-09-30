@@ -26,8 +26,11 @@
   },
   "expenses": {
     "title": "¡Agreguemos tus gastos compartidos!",
-    "labelName": "Gasto",
+    "labelName": "Nombre del gasto",
     "labelNamePlaceHolder": "Alquiler...",
-    "labelAmount": "Cantidad"
+    "labelAmount": "Cantidad",
+    "total": "Total",
+    "nameError": "El nombre del gasto es obligatorio",
+    "priceError": "¡La cantidad debe ser mayor que 0!"
   }
 }

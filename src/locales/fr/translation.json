@@ -34,6 +34,9 @@
     "title": "Ajoutons vos dépenses partagées !",
     "labelName": "Nom de la dépense",
     "labelNamePlaceHolder": "Loyer...",
-    "labelAmount": "Montant"
+    "labelAmount": "Montant",
+    "total": "Total",
+    "nameError": "Le nom de la dépense est obligatoire",
+    "priceError": "Le montant doit être supérieur à 0 !"
   }
 }

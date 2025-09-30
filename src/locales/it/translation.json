@@ -34,6 +34,9 @@
     "title": "Aggiungiamo le tue spese condivise!",
     "labelName": "Nome della spesa",
     "labelNamePlaceHolder": "Affitto...",
-    "labelAmount": "Importo"
+    "labelAmount": "Importo",
+    "total": "Totale",
+    "nameError": "Il nome della spesa è obbligatorio",
+    "priceError": "L'importo deve essere maggiore di 0!"
   }
 }

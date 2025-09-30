@@ -5,23 +5,27 @@ import { AnimatePresence, motion } from "motion/react";
 type InputDivProps = {
   text: string;
   inputName: string;
+  id: string;
   placeholder: string;
   type: string;
   value: string | number;
   error: string | null;
   setValue: (val: string) => void;
   addToTable: () => void;
+  onEnter: () => void;
 };
 
 function InputDiv({
   text,
   inputName,
+  id,
   placeholder,
   type,
   value,
   setValue,
   addToTable,
   error,
+  onEnter,
 }: InputDivProps) {
   return (
     <div className="flex flex-col gap-3 max-w-100 md:max-w-80 lg:mt-4">
@@ -37,13 +41,14 @@ function InputDiv({
         <input
           type={type}
           name={inputName}
-          id={inputName}
+          id={id}
           placeholder={placeholder}
           value={value}
           onChange={(e) => setValue(e.target.value)}
           onKeyDown={function (e) {
             if (e.key === "Enter") {
               addToTable();
+              onEnter();
             }
           }}
           className={clsx(

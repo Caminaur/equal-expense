@@ -1,10 +1,11 @@
 import { MoneyIcon, PlayIcon } from "../assets/icons";
 import { Link, useNavigate } from "react-router-dom";
 import { Trans, useTranslation } from "react-i18next";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 
 type InputDivProps = {
+  value: string;
   text: string;
   inputName: string;
   placeholder: string;
@@ -14,6 +15,7 @@ type InputDivProps = {
 };
 
 const InputDiv = ({
+  value,
   text,
   inputName,
   placeholder,
@@ -28,6 +30,7 @@ const InputDiv = ({
     <div className="flex border-light-blue rounded-sm overflow-hidden border-1 shadow-md shadow-black/16">
       <MoneyIcon className="h-10 p-3 w-12 bg-gradient-to-r from-light-blue to-dark-blue lg:w-14 lg:h-14" />
       <input
+        value={value}
         type={type}
         name={inputName}
         id={inputName}
@@ -68,6 +71,13 @@ type formData = {
   errorPartnerSalary: string | null;
 };
 
+type userData = {
+  userName: string;
+  userSalary: string;
+  partnerName: string;
+  partnerSalary: string;
+};
+
 function FormPage() {
   const { t } = useTranslation();
   const [form, setForm] = useState<formData>({
@@ -80,14 +90,39 @@ function FormPage() {
     errorUserSalary: null,
     errorPartnerSalary: null,
   });
-
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const storedUserData = localStorage.getItem("userData");
+
+    if (storedUserData) {
+      try {
+        const parsed: userData = JSON.parse(storedUserData);
+
+        setForm((prev) => ({
+          ...prev,
+          userName: parsed.userName || "",
+          userSalary: parsed.userSalary || "",
+          partnerName: parsed.partnerName || "",
+          partnerSalary: parsed.partnerSalary || "",
+          // mantenemos los errores como estaban
+          errorUserName: null,
+          errorUserSalary: null,
+          errorPartnerName: null,
+          errorPartnerSalary: null,
+        }));
+      } catch (err) {
+        console.error("Error parsing localStorage userData:", err);
+      }
+    }
+  }, []);
 
   return (
     <div className="h-full w-full p-0 lg:max-w-200 lg:max-h-9/12 lg:mt-8">
       <div className="h-full w-full bg-white/20 rounded-2xl p-8 lg:p-6 text-light-font flex flex-col justify-around">
         <InputDiv
           inputName="name"
+          value={form.userName}
           placeholder={t("form.userNamePlaceHolder")}
           text={t("form.userNameLabel")}
           type="string"
@@ -96,6 +131,7 @@ function FormPage() {
         />
         <InputDiv
           inputName="user-1-salary"
+          value={form.userSalary}
           placeholder="1400..."
           text={t("form.userSalaryLabel")}
           type="number"
@@ -104,6 +140,7 @@ function FormPage() {
         />
         <InputDiv
           inputName="name2"
+          value={form.partnerName}
           placeholder={t("form.partnerNamePlaceHolder")}
           text={t("form.partnerNameLabel")}
           type="string"
@@ -112,6 +149,7 @@ function FormPage() {
         />
         <InputDiv
           inputName="user-2-salary"
+          value={form.partnerSalary}
           placeholder="1200..."
           text={t("form.partnerSalaryLabel")}
           type="number"
@@ -132,41 +170,62 @@ function FormPage() {
               errorPartnerSalary: null,
             }));
 
+            let errors: {
+              errorUserName: string | null;
+              errorUserSalary: string | null;
+              errorPartnerName: string | null;
+              errorPartnerSalary: string | null;
+            } = {
+              errorUserName: null,
+              errorUserSalary: null,
+              errorPartnerName: null,
+              errorPartnerSalary: null,
+            };
+
             let hasError = false;
+
             if (!form.userName.trim()) {
-              setForm((prev) => ({
-                ...prev,
-                errorUserName: t("form.errorUserName"),
-              }));
+              errors.errorUserName = t("form.errorUserName");
               hasError = true;
             }
             if (!form.userSalary.trim()) {
-              setForm((prev) => ({
-                ...prev,
-                errorUserSalary: t("form.errorUserSalary"),
-              }));
+              errors.errorUserSalary = t("form.errorUserSalary");
               hasError = true;
             }
-
+            if (parseInt(form.userSalary) <= 0) {
+              errors.errorUserSalary = "mayor a 0";
+              hasError = true;
+            }
             if (!form.partnerName.trim()) {
-              setForm((prev) => ({
-                ...prev,
-                errorPartnerName: t("form.errorPartnerName"),
-              }));
+              errors.errorPartnerName = t("form.errorPartnerName");
               hasError = true;
             }
             if (!form.partnerSalary.trim()) {
-              setForm((prev) => ({
-                ...prev,
-                errorPartnerSalary: t("form.errorPartnerSalary"),
-              }));
+              errors.errorPartnerSalary = t("form.errorPartnerSalary");
               hasError = true;
             }
-            if (hasError) {
-              return;
+            if (parseInt(form.partnerSalary) <= 0) {
+              errors.errorPartnerSalary = "mayor a 0";
+              hasError = true;
             }
-            navigate("/sharedExpenses");
-            // Caso contrario continuamos
+
+            // 🔑 una sola actualización de estado
+            setForm((prev) => ({
+              ...prev,
+              ...errors,
+            }));
+
+            if (!hasError) {
+              const userData: userData = {
+                userName: form.userName,
+                userSalary: form.userSalary,
+                partnerName: form.partnerName,
+                partnerSalary: form.partnerSalary,
+              };
+
+              localStorage.setItem("userData", JSON.stringify(userData));
+              navigate("/sharedExpenses");
+            }
           }}
         >
           <Trans i18nKey="form.buttonText"></Trans>

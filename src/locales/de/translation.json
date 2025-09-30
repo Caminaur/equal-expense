@@ -31,9 +31,12 @@
     "fr": "Französisch"
   },
   "expenses": {
-    "title": "Fügen wir deine geteilten Ausgaben hinzu!",
-    "labelName": "Ausgabenname",
+    "title": "Fügen wir deine gemeinsamen Ausgaben hinzu!",
+    "labelName": "Name der Ausgabe",
     "labelNamePlaceHolder": "Miete...",
-    "labelAmount": "Betrag"
+    "labelAmount": "Betrag",
+    "total": "Gesamtsumme",
+    "nameError": "Der Name der Ausgabe ist erforderlich",
+    "priceError": "Der Betrag muss größer als 0 sein!"
   }
 }

@@ -63,6 +63,7 @@ function SharedExpenses() {
     ];
     setData(newData);
     setFormData({ name: "", price: "", nameError: null, priceError: null });
+    document.getElementById("expense")?.focus();
   }
   function removeExpense(index: number) {
     let newData = data.filter((_, i) => i !== index);
@@ -98,7 +99,8 @@ function SharedExpenses() {
         <div className="flex flex-col gap-3 justify-between md:flex-row md:gap-6 h-full">
           <div className="flex flex-col gap-4">
             <InputDiv
-              inputName="user-1-salary"
+              inputName="expense"
+              id="expense"
               placeholder={t("expenses.labelNamePlaceHolder")}
               text={t("expenses.labelName")}
               type="string"
@@ -106,10 +108,14 @@ function SharedExpenses() {
               setValue={(val) => setFormData({ ...formData, name: val })}
               addToTable={addExpense}
               error={formData.nameError}
+              onEnter={() => {
+                document.getElementById("cost")?.focus();
+              }}
             />
             <div className="flex items-end">
               <InputDiv
-                inputName="user-2-salary"
+                inputName="cost"
+                id="cost"
                 placeholder="1200..."
                 text={t("expenses.labelAmount")}
                 value={formData.price}
@@ -117,6 +123,7 @@ function SharedExpenses() {
                 addToTable={addExpense}
                 type="number"
                 error={formData.priceError}
+                onEnter={() => {}}
               />
             </div>
           </div>
