@@ -88,8 +88,8 @@ function FormPage() {
       <div className="h-full w-full bg-white/20 rounded-2xl p-8 lg:p-6 text-light-font flex flex-col justify-around">
         <InputDiv
           inputName="name"
-          placeholder="Ezequiel..."
-          text="Nombre"
+          placeholder={t("form.userNamePlaceHolder")}
+          text={t("form.userNameLabel")}
           type="string"
           error={form.errorUserName}
           setValue={(val) => setForm({ ...form, userName: val })}
@@ -97,15 +97,15 @@ function FormPage() {
         <InputDiv
           inputName="user-1-salary"
           placeholder="1400..."
-          text={t("form.label1")}
+          text={t("form.userSalaryLabel")}
           type="number"
           error={form.errorUserSalary}
           setValue={(val) => setForm({ ...form, userSalary: val })}
         />
         <InputDiv
           inputName="name2"
-          placeholder="Juana"
-          text={"Nombre de pareja"}
+          placeholder={t("form.partnerNamePlaceHolder")}
+          text={t("form.partnerNameLabel")}
           type="string"
           error={form.errorPartnerName}
           setValue={(val) => setForm({ ...form, partnerName: val })}
@@ -113,7 +113,7 @@ function FormPage() {
         <InputDiv
           inputName="user-2-salary"
           placeholder="1200..."
-          text={t("form.label2")}
+          text={t("form.partnerSalaryLabel")}
           type="number"
           error={form.errorPartnerSalary}
           setValue={(val) => setForm({ ...form, partnerSalary: val })}
@@ -136,14 +136,14 @@ function FormPage() {
             if (!form.userName.trim()) {
               setForm((prev) => ({
                 ...prev,
-                errorUserName: "Username is required",
+                errorUserName: t("form.errorUserName"),
               }));
               hasError = true;
             }
             if (!form.userSalary.trim()) {
               setForm((prev) => ({
                 ...prev,
-                errorUserSalary: "User salary is required",
+                errorUserSalary: t("form.errorUserSalary"),
               }));
               hasError = true;
             }
@@ -151,14 +151,14 @@ function FormPage() {
             if (!form.partnerName.trim()) {
               setForm((prev) => ({
                 ...prev,
-                errorPartnerName: "Partner name is required",
+                errorPartnerName: t("form.errorPartnerName"),
               }));
               hasError = true;
             }
             if (!form.partnerSalary.trim()) {
               setForm((prev) => ({
                 ...prev,
-                errorPartnerSalary: "Partner salary is required",
+                errorPartnerSalary: t("form.errorPartnerSalary"),
               }));
               hasError = true;
             }

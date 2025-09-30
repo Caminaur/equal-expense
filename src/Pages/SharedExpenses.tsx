@@ -39,10 +39,10 @@ function SharedExpenses() {
     let priceError: string | null = null;
 
     if (!isThereName) {
-      nameError = "The name of the expense is mandatory";
+      nameError = t("expenses.nameError");
     }
     if (!isTherePrice || !isPriceBiggerThanZero) {
-      priceError = "The amount needs to be greater than 0!";
+      priceError = t("expenses.priceError");
     }
 
     if (nameError || priceError) {
@@ -130,7 +130,7 @@ function SharedExpenses() {
         </div>
         <div>
           <p className="font-2 text-2xl md:w-2/3 text-shadow-sm text-shadow-black/50 mt-auto">
-            Total: {getTotal()}
+            {t("expenses.total")} {getTotal()}
           </p>
         </div>
         <Link

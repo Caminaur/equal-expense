@@ -1,8 +1,15 @@
 {
   "form": {
-    "label1": "Quanto guadagni?",
-    "label2": "Quanto guadagna il tuo partner?",
-    "label3": "Importo totale delle spese",
+    "userNameLabel": "Nome",
+    "userNamePlaceHolder": "Ezequiel",
+    "partnerNameLabel": "Nome del partner",
+    "partnerNamePlaceHolder": "Juana",
+    "errorUserName": "Il nome è obbligatorio",
+    "errorUserSalary": "Lo stipendio è obbligatorio",
+    "errorPartnerName": "Il nome del partner è obbligatorio",
+    "errorPartnerSalary": "Lo stipendio del partner è obbligatorio",
+    "userSalaryLabel": "Quanto guadagni?",
+    "partnerSalaryLabel": "Quanto guadagna il tuo partner?",
     "buttonText": "Calcola spese"
   },
   "info": {

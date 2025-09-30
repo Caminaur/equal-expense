@@ -1,8 +1,15 @@
 {
   "form": {
-    "label1": "Wie viel verdienst du?",
-    "label2": "Wie viel verdient dein Partner?",
-    "label3": "Gesamtausgaben",
+    "userNameLabel": "Name",
+    "userNamePlaceHolder": "Ezequiel",
+    "partnerNameLabel": "Name des Partners",
+    "partnerNamePlaceHolder": "Juana",
+    "errorUserName": "Name ist erforderlich",
+    "errorUserSalary": "Gehalt des Nutzers ist erforderlich",
+    "errorPartnerName": "Name des Partners ist erforderlich",
+    "errorPartnerSalary": "Gehalt des Partners ist erforderlich",
+    "userSalaryLabel": "Wie viel verdienst du?",
+    "partnerSalaryLabel": "Wie viel verdient dein Partner?",
     "buttonText": "Ausgaben berechnen"
   },
   "info": {

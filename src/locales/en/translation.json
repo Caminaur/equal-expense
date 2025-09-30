@@ -1,8 +1,15 @@
 {
   "form": {
-    "label1": "How much do you earn?",
-    "label2": "How much does your partner earn?",
-    "label3": "Total amount of expenses",
+    "userNameLabel": "Name",
+    "userNamePlaceHolder": "Ezequiel",
+    "partnerNameLabel": "Partner's name",
+    "partnerNamePlaceHolder": "Juana",
+    "errorUserName": "User name is required",
+    "errorUserSalary": "User salary is required",
+    "errorPartnerName": "Partner name is required",
+    "errorPartnerSalary": "Partner salary is required",
+    "userSalaryLabel": "How much do you earn?",
+    "partnerSalaryLabel": "How much does your partner earn?",
     "buttonText": "Calculate Expenses"
   },
   "info": {
@@ -27,6 +34,9 @@
     "title": "Let's add your shared expenses!",
     "labelName": "Expense name",
     "labelNamePlaceHolder": "Rent...",
-    "labelAmount": "Amount"
+    "labelAmount": "Amount",
+    "total": "Total",
+    "nameError": "The name of the expense is mandatory",
+    "priceError": "The amount needs to be greater than 0!"
   }
 }

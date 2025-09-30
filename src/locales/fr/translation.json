@@ -1,8 +1,15 @@
 {
   "form": {
-    "label1": "Combien gagnes-tu ?",
-    "label2": "Combien gagne ton partenaire ?",
-    "label3": "Montant total des dépenses",
+    "userNameLabel": "Nom",
+    "userNamePlaceHolder": "Ezequiel",
+    "partnerNameLabel": "Nom du partenaire",
+    "partnerNamePlaceHolder": "Juana",
+    "errorUserName": "Le nom est requis",
+    "errorUserSalary": "Le salaire est requis",
+    "errorPartnerName": "Le nom du partenaire est requis",
+    "errorPartnerSalary": "Le salaire du partenaire est requis",
+    "userSalaryLabel": "Combien gagnes-tu ?",
+    "partnerSalaryLabel": "Combien gagne ton partenaire ?",
     "buttonText": "Calculer les dépenses"
   },
   "info": {

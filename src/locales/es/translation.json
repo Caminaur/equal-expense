@@ -1,8 +1,15 @@
 {
   "form": {
-    "label1": "¿Cuánto dinero ganas?",
-    "label2": "¿Cuánto dinero gana tu pareja?",
-    "label3": "Monto total de los gastos",
+    "userNameLabel": "Nombre",
+    "userNamePlaceHolder": "Ezequiel",
+    "partnerNameLabel": "Nombre de la pareja",
+    "partnerNamePlaceHolder": "Juana",
+    "errorUserName": "El nombre es obligatorio",
+    "errorUserSalary": "El salario es obligatorio",
+    "errorPartnerName": "El nombre de la pareja es obligatorio",
+    "errorPartnerSalary": "El salario de la pareja es obligatorio",
+    "userSalaryLabel": "¿Cuánto ganas?",
+    "partnerSalaryLabel": "¿Cuánto gana tu pareja?",
     "buttonText": "Calcular gastos"
   },
   "info": {
