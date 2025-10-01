@@ -28,7 +28,7 @@ function InputDiv({
   onEnter,
 }: InputDivProps) {
   return (
-    <div className="flex flex-col gap-3 max-w-100 md:max-w-80 lg:mt-4">
+    <div className="flex flex-col gap-1 md:gap-3 max-w-100 md:max-w-80 lg:mt-4">
       <label htmlFor={inputName} className="font-1 text-2xl">
         {text}
       </label>
@@ -70,7 +70,7 @@ function InputDiv({
       </div>
       <AnimatePresence>
         {error ? (
-          <div className="relative h-6">
+          <div className="relative h-9">
             <motion.p
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0, transition: { duration: 0.5 } }}

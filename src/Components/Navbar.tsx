@@ -30,7 +30,7 @@ function Navbar() {
     </button>
   );
   return (
-    <div className="w-full flex justify-between items-center pb-4 lg:bg-light lg:max-w-200 lg:pb-default lg:py-3 lg:px-4 lg:rounded-lg relative">
+    <div className="w-full flex justify-between items-center pb-4 lg:bg-light lg:max-w-200 lg:pb-default lg:py-3 lg:px-4 lg:rounded-lg relative z-100">
       <Link to={"/"} className="text-white text-2xl font-1 lg:text-text-dark">
         Shared Expenses
       </Link>
@@ -53,7 +53,7 @@ function Navbar() {
                 active ? "opacity-100 mt-2" : "opacity-0 pointer-events-none"
               }`}
             >
-              <ul className="flex flex-col p-4 gap-2">
+              <ul className="flex flex-col p-4 gap-2 shadow-md shadow-black/30">
                 <ButtonLang
                   dbname="english"
                   displayName={t("navbar.en")}

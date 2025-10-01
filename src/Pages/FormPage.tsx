@@ -116,6 +116,30 @@ function FormPage() {
       }
     }
   }, []);
+  useEffect(() => {
+    if (
+      form.errorUserName ||
+      form.errorUserSalary ||
+      form.errorPartnerName ||
+      form.errorPartnerSalary
+    ) {
+      const timer = setTimeout(() => {
+        setForm({
+          ...form,
+          errorUserName: null,
+          errorUserSalary: null,
+          errorPartnerName: null,
+          errorPartnerSalary: null,
+        });
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [
+    form.errorUserName,
+    form.errorUserSalary,
+    form.errorPartnerName,
+    form.errorPartnerSalary,
+  ]);
 
   return (
     <div className="h-full w-full p-0 lg:max-w-200 lg:max-h-9/12 lg:mt-8">
