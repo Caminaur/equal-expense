@@ -4,6 +4,9 @@ import { Trans, useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 
+// TODO:
+// - a veces los error tapan el input, sobre todo partnerName.
+
 type InputDivProps = {
   value: string;
   text: string;
@@ -142,120 +145,118 @@ function FormPage() {
   ]);
 
   return (
-    <div className="h-full w-full p-0 lg:max-w-200 lg:max-h-9/12 lg:mt-8">
-      <div className="h-full w-full bg-white/20 rounded-2xl p-8 lg:p-6 text-light-font flex flex-col justify-around">
-        <InputDiv
-          inputName="name"
-          value={form.userName}
-          placeholder={t("form.userNamePlaceHolder")}
-          text={t("form.userNameLabel")}
-          type="string"
-          error={form.errorUserName}
-          setValue={(val) => setForm({ ...form, userName: val })}
-        />
-        <InputDiv
-          inputName="user-1-salary"
-          value={form.userSalary}
-          placeholder="1400..."
-          text={t("form.userSalaryLabel")}
-          type="number"
-          error={form.errorUserSalary}
-          setValue={(val) => setForm({ ...form, userSalary: val })}
-        />
-        <InputDiv
-          inputName="name2"
-          value={form.partnerName}
-          placeholder={t("form.partnerNamePlaceHolder")}
-          text={t("form.partnerNameLabel")}
-          type="string"
-          error={form.errorPartnerName}
-          setValue={(val) => setForm({ ...form, partnerName: val })}
-        />
-        <InputDiv
-          inputName="user-2-salary"
-          value={form.partnerSalary}
-          placeholder="1200..."
-          text={t("form.partnerSalaryLabel")}
-          type="number"
-          error={form.errorPartnerSalary}
-          setValue={(val) => setForm({ ...form, partnerSalary: val })}
-        />
-        <Link
-          to={"/sharedExpenses"}
-          className="bg-light-blue flex items-center justify-between px-4 py-4 rounded-lg text-white w-full mt-auto text-2xl max-w-80 shadow-sm shadow-black/40 hover:shadow-md duration-200 cursor-pointer hover:brightness-120 transition-all"
-          onClick={(e) => {
-            e.preventDefault();
+    <div className="flex flex-col h-full w-full p-6 md:p-8">
+      <InputDiv
+        inputName="name"
+        value={form.userName}
+        placeholder={t("form.userNamePlaceHolder")}
+        text={t("form.userNameLabel")}
+        type="string"
+        error={form.errorUserName}
+        setValue={(val) => setForm({ ...form, userName: val })}
+      />
+      <InputDiv
+        inputName="user-1-salary"
+        value={form.userSalary}
+        placeholder="1400..."
+        text={t("form.userSalaryLabel")}
+        type="number"
+        error={form.errorUserSalary}
+        setValue={(val) => setForm({ ...form, userSalary: val })}
+      />
+      <InputDiv
+        inputName="name2"
+        value={form.partnerName}
+        placeholder={t("form.partnerNamePlaceHolder")}
+        text={t("form.partnerNameLabel")}
+        type="string"
+        error={form.errorPartnerName}
+        setValue={(val) => setForm({ ...form, partnerName: val })}
+      />
+      <InputDiv
+        inputName="user-2-salary"
+        value={form.partnerSalary}
+        placeholder="1200..."
+        text={t("form.partnerSalaryLabel")}
+        type="number"
+        error={form.errorPartnerSalary}
+        setValue={(val) => setForm({ ...form, partnerSalary: val })}
+      />
+      <Link
+        to={"/sharedExpenses"}
+        className="bg-light-blue flex items-center justify-between px-4 py-4 rounded-lg text-white w-full mt-auto text-2xl max-w-80 shadow-sm shadow-black/40 hover:shadow-md duration-200 cursor-pointer hover:brightness-120 transition-all"
+        onClick={(e) => {
+          e.preventDefault();
 
-            setForm((prev) => ({
-              ...prev,
-              errorUserName: null,
-              errorUserSalary: null,
-              errorPartnerName: null,
-              errorPartnerSalary: null,
-            }));
+          setForm((prev) => ({
+            ...prev,
+            errorUserName: null,
+            errorUserSalary: null,
+            errorPartnerName: null,
+            errorPartnerSalary: null,
+          }));
 
-            let errors: {
-              errorUserName: string | null;
-              errorUserSalary: string | null;
-              errorPartnerName: string | null;
-              errorPartnerSalary: string | null;
-            } = {
-              errorUserName: null,
-              errorUserSalary: null,
-              errorPartnerName: null,
-              errorPartnerSalary: null,
+          let errors: {
+            errorUserName: string | null;
+            errorUserSalary: string | null;
+            errorPartnerName: string | null;
+            errorPartnerSalary: string | null;
+          } = {
+            errorUserName: null,
+            errorUserSalary: null,
+            errorPartnerName: null,
+            errorPartnerSalary: null,
+          };
+
+          let hasError = false;
+
+          if (!form.userName.trim()) {
+            errors.errorUserName = t("form.errorUserName");
+            hasError = true;
+          }
+          if (!form.userSalary.trim()) {
+            errors.errorUserSalary = t("form.errorUserSalary");
+            hasError = true;
+          }
+          if (parseInt(form.userSalary) <= 0) {
+            errors.errorUserSalary = "mayor a 0";
+            hasError = true;
+          }
+          if (!form.partnerName.trim()) {
+            errors.errorPartnerName = t("form.errorPartnerName");
+            hasError = true;
+          }
+          if (!form.partnerSalary.trim()) {
+            errors.errorPartnerSalary = t("form.errorPartnerSalary");
+            hasError = true;
+          }
+          if (parseInt(form.partnerSalary) <= 0) {
+            errors.errorPartnerSalary = "mayor a 0";
+            hasError = true;
+          }
+
+          // 🔑 una sola actualización de estado
+          setForm((prev) => ({
+            ...prev,
+            ...errors,
+          }));
+
+          if (!hasError) {
+            const userData: userData = {
+              userName: form.userName,
+              userSalary: form.userSalary,
+              partnerName: form.partnerName,
+              partnerSalary: form.partnerSalary,
             };
 
-            let hasError = false;
-
-            if (!form.userName.trim()) {
-              errors.errorUserName = t("form.errorUserName");
-              hasError = true;
-            }
-            if (!form.userSalary.trim()) {
-              errors.errorUserSalary = t("form.errorUserSalary");
-              hasError = true;
-            }
-            if (parseInt(form.userSalary) <= 0) {
-              errors.errorUserSalary = "mayor a 0";
-              hasError = true;
-            }
-            if (!form.partnerName.trim()) {
-              errors.errorPartnerName = t("form.errorPartnerName");
-              hasError = true;
-            }
-            if (!form.partnerSalary.trim()) {
-              errors.errorPartnerSalary = t("form.errorPartnerSalary");
-              hasError = true;
-            }
-            if (parseInt(form.partnerSalary) <= 0) {
-              errors.errorPartnerSalary = "mayor a 0";
-              hasError = true;
-            }
-
-            // 🔑 una sola actualización de estado
-            setForm((prev) => ({
-              ...prev,
-              ...errors,
-            }));
-
-            if (!hasError) {
-              const userData: userData = {
-                userName: form.userName,
-                userSalary: form.userSalary,
-                partnerName: form.partnerName,
-                partnerSalary: form.partnerSalary,
-              };
-
-              localStorage.setItem("userData", JSON.stringify(userData));
-              navigate("/sharedExpenses");
-            }
-          }}
-        >
-          <Trans i18nKey="form.buttonText"></Trans>
-          <PlayIcon className="" />
-        </Link>
-      </div>
+            localStorage.setItem("userData", JSON.stringify(userData));
+            navigate("/sharedExpenses");
+          }
+        }}
+      >
+        <Trans i18nKey="form.buttonText"></Trans>
+        <PlayIcon className="" />
+      </Link>
     </div>
   );
 }

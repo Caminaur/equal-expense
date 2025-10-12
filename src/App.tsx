@@ -1,4 +1,3 @@
-import Navbar from "./Components/Navbar";
 import FormPage from "./Pages/FormPage";
 import SharedExpenses from "./Pages/SharedExpenses";
 import InfoPage from "./Pages/InfoPage";
@@ -8,6 +7,8 @@ import {
   useParams,
   Routes,
 } from "react-router-dom";
+import ResultPage from "./Pages/ResultPage";
+import Layout from "./Layouts/Layout";
 
 const ComponentView = () => {
   const { component } = useParams();
@@ -15,7 +16,8 @@ const ComponentView = () => {
   let ComponentToRender: React.ComponentType;
   switch (component) {
     case "home":
-      ComponentToRender = InfoPage;
+      ComponentToRender = ResultPage;
+      // ComponentToRender = InfoPage;
       break;
     case "form":
       ComponentToRender = FormPage;
@@ -27,23 +29,24 @@ const ComponentView = () => {
       ComponentToRender = InfoPage;
       break;
     default:
+      ComponentToRender = ResultPage;
       ComponentToRender = InfoPage;
   }
 
-  return <ComponentToRender />;
+  return (
+    <Layout>
+      <ComponentToRender />
+    </Layout>
+  );
 };
 
 function App() {
   return (
     <Router>
-      <div className="h-screen w-full bg-gradient-to-t from-light-blue to-dark-blue md:bg-gradient-to-r flex flex-col p-4 overflow-hidden items-center lg:gap-4">
-        {/*  navbar */}
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<ComponentView />} />
-          <Route path="/:component" element={<ComponentView />} />
-        </Routes>
-      </div>
+      <Routes>
+        <Route path="/" element={<ComponentView />} />
+        <Route path="/:component" element={<ComponentView />} />
+      </Routes>
     </Router>
   );
 }

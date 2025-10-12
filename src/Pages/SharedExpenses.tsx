@@ -112,97 +112,95 @@ function SharedExpenses() {
   }, [formData.nameError, formData.priceError]);
 
   return (
-    <div className="h-full w-full p-0 lg:max-w-200 lg:max-h-9/12 lg:mt-8">
-      <div className="h-full w-full bg-white/20 rounded-2xl p-2 sm:p-8 lg:p-6 text-light-font flex flex-col justify-between gap-2 md:gap-4">
-        <div>
-          <p className="w-fit font-1 text-lg py-1 md:py-3 text-shadow-sm text-shadow-black/50 border-t-6 border-b-6 border-light-bg/80 ">
-            {t("expenses.title")}
-          </p>
-        </div>
-        <div className="flex flex-col gap-3 justify-between md:flex-row md:gap-6 h-full">
-          <div className="flex flex-col gap-2 md:gap-4">
-            <InputDiv
-              inputName="expense"
-              id="expense"
-              placeholder={t("expenses.labelNamePlaceHolder")}
-              text={t("expenses.labelName")}
-              type="string"
-              value={formData.name}
-              setValue={(val) => setFormData({ ...formData, name: val })}
-              addToTable={addExpense}
-              error={formData.nameError}
-              onEnter={() => {
-                document.getElementById("cost")?.focus();
-              }}
-            />
-            <div className="flex items-end">
-              <InputDiv
-                inputName="cost"
-                id="cost"
-                placeholder="1200..."
-                text={t("expenses.labelAmount")}
-                value={formData.price}
-                setValue={(val) => setFormData({ ...formData, price: val })}
-                addToTable={addExpense}
-                type="number"
-                error={formData.priceError}
-                onEnter={() => {}}
-              />
-            </div>
-          </div>
-          <div className="flex-1 overflow-y-auto">
-            {data.length !== 0 ? (
-              <ExpenseTable data={data} onRemove={removeExpense} />
-            ) : (
-              ""
-            )}
-          </div>
-        </div>
-        <div>
-          <AnimatePresence>
-            {expenseAmountError ? (
-              <div className="">
-                <motion.p
-                  onClick={() => setExpenseAmountError(null)}
-                  initial={{ opacity: 0 }}
-                  animate={{
-                    opacity: 1,
-                    transition: { duration: 0.5 },
-                  }}
-                  exit={{
-                    opacity: 0,
-                    transition: { duration: 0.3 },
-                  }}
-                  className="font-2 font-bold text-error-red text-shadow-lg text-shadow-black/30 z-10"
-                >
-                  {expenseAmountError}
-                </motion.p>
-              </div>
-            ) : (
-              ""
-            )}
-          </AnimatePresence>
-          <p className="font-2 text-2xl md:w-2/3 text-shadow-sm text-shadow-black/50 mt-auto">
-            {t("expenses.total")} {getTotal()}
-          </p>
-        </div>
-        <Link
-          to={"/form"}
-          className="bg-light-blue flex items-center justify-between px-4 py-4 rounded-lg text-white w-full text-2xl max-w-80 shadow-sm shadow-black/40 hover:shadow-md duration-200 cursor-pointer hover:brightness-120 transition-all"
-          onClick={(e) => {
-            e.preventDefault();
-            if (data.length < 3) {
-              const error = "Tienes que agregar al menos 3 gastos!";
-              setExpenseAmountError(error);
-            } else {
-              navigate("/graphs");
-            }
-          }}
-        >
-          <Trans i18nKey="form.buttonText"></Trans>
-          <PlayIcon className="" />
-        </Link>
+    <div className="h-full w-full p-4 sm:p-8 lg:p-6 text-light-font flex flex-col justify-between gap-2 md:gap-4">
+      <div>
+        <p className="w-fit font-1 text-lg py-1 md:py-3 text-shadow-sm text-shadow-black/50 border-t-6 border-b-6 border-light-bg/80 ">
+          {t("expenses.title")}
+        </p>
       </div>
+      <div className="flex flex-col gap-3 justify-between md:flex-row md:gap-6 h-full">
+        <div className="flex flex-col gap-2 md:gap-4">
+          <InputDiv
+            inputName="expense"
+            id="expense"
+            placeholder={t("expenses.labelNamePlaceHolder")}
+            text={t("expenses.labelName")}
+            type="string"
+            value={formData.name}
+            setValue={(val) => setFormData({ ...formData, name: val })}
+            addToTable={addExpense}
+            error={formData.nameError}
+            onEnter={() => {
+              document.getElementById("cost")?.focus();
+            }}
+          />
+          <div className="flex items-end">
+            <InputDiv
+              inputName="cost"
+              id="cost"
+              placeholder="1200..."
+              text={t("expenses.labelAmount")}
+              value={formData.price}
+              setValue={(val) => setFormData({ ...formData, price: val })}
+              addToTable={addExpense}
+              type="number"
+              error={formData.priceError}
+              onEnter={() => {}}
+            />
+          </div>
+        </div>
+        <div className="flex-1 overflow-y-auto">
+          {data.length !== 0 ? (
+            <ExpenseTable data={data} onRemove={removeExpense} />
+          ) : (
+            ""
+          )}
+        </div>
+      </div>
+      <div>
+        <AnimatePresence>
+          {expenseAmountError ? (
+            <div className="">
+              <motion.p
+                onClick={() => setExpenseAmountError(null)}
+                initial={{ opacity: 0 }}
+                animate={{
+                  opacity: 1,
+                  transition: { duration: 0.5 },
+                }}
+                exit={{
+                  opacity: 0,
+                  transition: { duration: 0.3 },
+                }}
+                className="font-2 font-bold text-error-red text-shadow-lg text-shadow-black/30 z-10"
+              >
+                {expenseAmountError}
+              </motion.p>
+            </div>
+          ) : (
+            ""
+          )}
+        </AnimatePresence>
+        <p className="font-2 text-2xl md:w-2/3 text-shadow-sm text-shadow-black/50 mt-auto">
+          {t("expenses.total")} {getTotal()}
+        </p>
+      </div>
+      <Link
+        to={"/form"}
+        className="bg-light-blue flex items-center justify-between px-4 py-4 rounded-lg text-white w-full text-2xl max-w-80 shadow-sm shadow-black/40 hover:shadow-md duration-200 cursor-pointer hover:brightness-120 transition-all"
+        onClick={(e) => {
+          e.preventDefault();
+          if (data.length < 3) {
+            const error = "Tienes que agregar al menos 3 gastos!";
+            setExpenseAmountError(error);
+          } else {
+            navigate("/graphs");
+          }
+        }}
+      >
+        <Trans i18nKey="form.buttonText"></Trans>
+        <PlayIcon className="" />
+      </Link>
     </div>
   );
 }
