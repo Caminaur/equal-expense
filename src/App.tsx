@@ -30,7 +30,7 @@ const ComponentView = () => {
       break;
     default:
       ComponentToRender = ResultPage;
-      ComponentToRender = InfoPage;
+    // ComponentToRender = InfoPage;
   }
 
   return (
