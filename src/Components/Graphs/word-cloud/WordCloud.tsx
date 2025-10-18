@@ -1,19 +1,19 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useMemo } from "react";
 import cloud from "d3-cloud";
 import { select } from "d3-selection";
 import { scaleLinear } from "d3-scale";
 import { schemeCategory10 } from "d3-scale-chromatic";
 import { easeCubicOut } from "d3-ease";
-import { color } from "d3-color";
 import { max, min } from "d3";
 
 type Expense = { expense: string; amount: number };
-type WordDatum = cloud.Word;
+type WordDatum = cloud.Word & { amount?: number };
 
 export default function WordCloud() {
   const ref = useRef<HTMLDivElement>(null);
   const [data, setData] = useState<Expense[]>([]);
   const [size, setSize] = useState(500);
+
   const PADDING = size < 400 ? 2 : 5;
 
   useEffect(() => {
@@ -39,19 +39,15 @@ export default function WordCloud() {
     }
   }, []);
 
-  // Calcular tamaños, para evitar calculos innecesarios
-  const words: WordDatum[] = (() => {
+  // Memo para evitar recalcular en cada render
+  const words: WordDatum[] = useMemo(() => {
     const base = data.length ? data : [];
-
-    // Rango de letra
     const MIN_SIZE = Math.round(size / 18);
     const MAX_SIZE = Math.round(size / 7);
-
     const amounts = base.map((d) => Number(d.amount) || 0);
     const minA = min(amounts) ?? 0;
     const maxA = max(amounts) ?? 1;
 
-    // Escala lineal
     const sizeScale = scaleLinear()
       .domain([minA, maxA])
       .range([MIN_SIZE, MAX_SIZE])
@@ -60,20 +56,43 @@ export default function WordCloud() {
     const mapped = base.map((t) => ({
       text: t.expense,
       size: sizeScale(Number(t.amount) || 0),
+      amount: t.amount,
     })) as WordDatum[];
     return mapped;
-  })();
+  }, [data, size]);
 
-  // Dibujamos la WordCloud
+  // Tooltip D3 "fuera de React"
   useEffect(() => {
+    let tooltip: HTMLDivElement | null = null;
     const container = ref.current;
     if (!container || !words.length) return;
 
     const width = size;
     const height = size;
 
+    // Crea el tooltip si no existe
+    tooltip = document.createElement("div");
+    tooltip.className = "wordcloud-tooltip";
+    Object.assign(tooltip.style, {
+      opacity: "0",
+      position: "fixed",
+      pointerEvents: "none",
+      background: "#fff",
+      color: "#111",
+      border: "1px solid #999",
+      fontSize: "16px",
+      borderRadius: "10px",
+      padding: "9px 18px",
+      boxShadow: "0 3px px #0002",
+      zIndex: "9999",
+      fontWeight: "500",
+      transition: "opacity 0.16s",
+      whiteSpace: "nowrap",
+    });
+    document.body.appendChild(tooltip);
+
+    // Dibuja la nube
     const draw = (layoutWords: WordDatum[]) => {
-      // Lo vaciamos en caso de contener algo
       select(container).select("svg").remove();
 
       const svg = select(container)
@@ -110,7 +129,7 @@ export default function WordCloud() {
         )
         .text((d) => String(d.text));
 
-      // Animación de aparición
+      // Animación
       texts
         .transition()
         .ease(easeCubicOut)
@@ -123,27 +142,22 @@ export default function WordCloud() {
           (d) => `translate(${d.x},${d.y}) rotate(${d.rotate}) scale(1)`
         );
 
-      // Efectos hover
+      // Tooltips estilo D3
       texts
-        .on("mouseenter", function (this: SVGTextElement) {
-          const base = select(this).attr("data-base-transform");
-          const orig = select(this).attr("data-original-color") || "#000";
-          const brighter = color(orig)?.brighter(0.8)?.formatHex() ?? orig;
-          select(this)
-            .raise()
-            .transition()
-            .duration(150)
-            .attr("transform", `${base} scale(1.15)`)
-            .style("fill", brighter);
+        .on("mouseover", function (_, d) {
+          select(this).raise().style("stroke", "#00000070").style("opacity", 1);
+          tooltip!.style.opacity = "1";
+          tooltip!.innerHTML = `<b>${d.text}</b><br/>€ ${Number(
+            d.amount ?? d.size ?? 0
+          ).toLocaleString()}`;
         })
-        .on("mouseleave", function (this: SVGTextElement) {
-          const base = select(this).attr("data-base-transform");
-          const orig = select(this).attr("data-original-color") || "#000";
-          select(this)
-            .transition()
-            .duration(150)
-            .attr("transform", `${base} scale(1)`)
-            .style("fill", orig);
+        .on("mousemove", function (event) {
+          tooltip!.style.left = `${event.clientX + 10}px`;
+          tooltip!.style.top = `${event.clientY + 10}px`;
+        })
+        .on("mouseleave", function () {
+          select(this).style("stroke", "none").style("opacity", 1);
+          tooltip!.style.opacity = "0";
         });
     };
 
@@ -151,16 +165,22 @@ export default function WordCloud() {
       .size([width, height])
       .words(words)
       .padding(PADDING)
-      // .rotate(() => (Math.random() > 0.5 ? 90 : 0))
       .rotate(() => 0)
       .font("Impact")
       .fontSize((d) => (d.size as number) || 12)
       .on("end", (w) => draw(w as WordDatum[]));
 
     layout.start();
-  }, [words]);
 
-  // Container
+    // Limpia el tooltip al desmontar
+    return () => {
+      if (tooltip && tooltip.parentNode) {
+        tooltip.parentNode.removeChild(tooltip);
+      }
+    };
+  }, [words, size]);
+
+  // Solo el contenedor
   return (
     <div
       ref={ref}
