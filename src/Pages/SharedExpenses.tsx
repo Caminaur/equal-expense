@@ -112,13 +112,13 @@ function SharedExpenses() {
   }, [formData.nameError, formData.priceError]);
 
   return (
-    <div className="h-full w-full p-4 sm:p-8 lg:p-6 text-light-font flex flex-col justify-between gap-2 md:gap-4">
+    <div className="h-full w-full p-4 sm:p-8 lg:p-6 text-light-font flex flex-col justify-between gap-2 md:gap-4 lg:gap-2">
       <div>
         <p className="w-fit font-1 text-lg py-1 md:py-3 text-shadow-sm text-shadow-black/50 border-t-6 border-b-6 border-light-bg/80 ">
           {t("expenses.title")}
         </p>
       </div>
-      <div className="flex flex-col gap-3 justify-between md:flex-row md:gap-6 h-full">
+      <div className="flex flex-col gap-3 justify-between md:flex-row md:gap-6 h-full ">
         <div className="flex flex-col gap-2 md:gap-4">
           <InputDiv
             inputName="expense"
@@ -149,7 +149,7 @@ function SharedExpenses() {
             />
           </div>
         </div>
-        <div className="flex-1 overflow-y-auto">
+        <div className="flex-1 overflow-y-auto lg:flex-4/12">
           {data.length !== 0 ? (
             <ExpenseTable data={data} onRemove={removeExpense} />
           ) : (
@@ -181,13 +181,13 @@ function SharedExpenses() {
             ""
           )}
         </AnimatePresence>
-        <p className="font-2 text-2xl md:w-2/3 text-shadow-sm text-shadow-black/50 mt-auto">
+        <p className="font-2 text-lg md:w-2/3 text-shadow-sm text-shadow-black/50 mt-auto lg:text-lg">
           {t("expenses.total")} {getTotal()}
         </p>
       </div>
       <Link
         to={"/form"}
-        className="bg-light-blue flex items-center justify-between px-4 py-4 rounded-lg text-white w-full text-2xl max-w-80 shadow-sm shadow-black/40 hover:shadow-md duration-200 cursor-pointer hover:brightness-120 transition-all"
+        className="bg-light-blue flex items-center justify-between px-3 py-3 rounded-lg text-white w-full text-lg max-w-80 shadow-sm shadow-black/40 hover:shadow-md duration-200 cursor-pointer hover:brightness-120 transition-all lg:text-lg lg:px-2 lg:py-2 lg:max-w-70"
         onClick={(e) => {
           e.preventDefault();
           if (data.length < 3) {

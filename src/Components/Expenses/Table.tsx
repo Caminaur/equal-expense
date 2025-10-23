@@ -45,7 +45,7 @@ export default function ExpenseTable({ data, onRemove }: Props) {
   });
 
   return (
-    <div className="overflow-y-auto max-h-60 max-w-120 md:max-h-117">
+    <div className="overflow-y-auto max-h-60 max-w-120 md:max-h-117 lg:max-h-80">
       <table className="border-collapse border border-gray-300 w-full">
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (

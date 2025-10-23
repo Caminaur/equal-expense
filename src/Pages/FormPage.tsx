@@ -26,12 +26,12 @@ const InputDiv = ({
   setValue,
   type,
 }: InputDivProps) => (
-  <div className="flex flex-col gap-1 max-w-100 lg:mt-4">
-    <label htmlFor={inputName} className="font-2 text-2xl">
+  <div className="flex flex-col gap-1 max-w-100 lg:mt-0">
+    <label htmlFor={inputName} className="font-2 text-2xl lg:text-lg">
       {text}
     </label>
     <div className="flex border-light-blue rounded-sm overflow-hidden border-1 shadow-md shadow-black/16">
-      <MoneyIcon className="h-10 p-3 w-12 bg-gradient-to-r from-light-blue to-dark-blue lg:w-14 lg:h-14" />
+      <MoneyIcon className="h-10 p-3 w-12 bg-gradient-to-r from-light-blue to-dark-blue lg:w-10 lg:h-10" />
       <input
         value={value}
         type={type}
@@ -145,7 +145,7 @@ function FormPage() {
   ]);
 
   return (
-    <div className="flex flex-col h-full w-full p-6 md:p-8">
+    <div className="flex flex-col h-full w-full p-6 md:p-8 lg:p-6">
       <InputDiv
         inputName="name"
         value={form.userName}
@@ -184,7 +184,7 @@ function FormPage() {
       />
       <Link
         to={"/sharedExpenses"}
-        className="bg-light-blue flex items-center justify-between px-4 py-4 rounded-lg text-white w-full mt-auto text-2xl max-w-80 shadow-sm shadow-black/40 hover:shadow-md duration-200 cursor-pointer hover:brightness-120 transition-all"
+        className="bg-light-blue flex items-center justify-between px-4 py-4 rounded-lg text-white w-full mt-auto text-2xl max-w-80 shadow-sm shadow-black/40 hover:shadow-md duration-200 cursor-pointer hover:brightness-120 transition-all lg:text-lg lg:px-2 lg:py-2 lg:max-w-70"
         onClick={(e) => {
           e.preventDefault();
 
